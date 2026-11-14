@@ -25,7 +25,7 @@ bun run dev
 
 Visualizations and data: NASA Earth Information Center. Add exact sources for each visual in `docs/sources.md`.
 
-spacewise/
+earth-jukebox/
 ├── backend/                          # Lightweight Express server (for future live NASA APIs)
 │   ├── server.js
 │   └── package.json
