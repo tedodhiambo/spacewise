@@ -51,3 +51,24 @@ earth-jukebox/
 │
 └── README.md
 
+### 1. Clone the Repository
+```bash
+git clone <your-repo-url>
+cd earth-jukebox
+```
+
+### 2. Install & Start the Backend (Port 5000)
+```bash
+cd backend
+npm install
+npm start
+```
+
+### 3. Install & Start the Frontend (Port 5173)
+Open a second terminal tab:
+```bash
+cd frontend
+npm install
+npm run dev
+```
+Open **`http://localhost:5173/`** in your browser.
