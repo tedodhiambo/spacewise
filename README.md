@@ -25,6 +25,30 @@ bun run dev
 
 Visualizations and data: NASA Earth Information Center. Add exact sources for each visual in `docs/sources.md`.
 
-## License
+earth-jukebox/
+├── backend/                     # Node.js + Express (Thin proxy & metadata API)
+│   ├── data/
+│   │   └── tracks.json          # Curated EIC track list (videos, milestones, audio rules)
+│   ├── routes/
+│   │   └── nasaProxy.js         # Fetches NASA EIC media/APIs to avoid browser CORS blocks
+│   ├── server.js                # Express entry point
+│   └── package.json
+│
+├── frontend/                    # React (Vite)
+│   ├── public/
+│   │   └── fallback-media/      # Local copies of 2–3 NASA EIC videos/frames for offline demo safety
+│   ├── src/
+│   │   ├── components/
+│   │   │   ├── JukeboxPlayer.jsx    # Main playback UI, track selector, and keyboard shortcuts
+│   │   │   ├── EicVisualizer.jsx    # Renders NASA video/frames onto HTML5 <canvas>
+│   │   │   ├── AudioLegendModal.jsx # Accessible "Press L for Audio Guide" intro
+│   │   │   └── LiveNarration.jsx    # Hidden aria-live region + SpeechSynthesis controller
+│   │   ├── engine/
+│   │   │   ├── frameAnalyzer.js     # Reads <canvas> RGBA pixels & detects heat/CO2 hotspots
+│   │   │   └── soundEngine.js       # Web Audio API synth (oscillators, stereo panner, scales)
+│   │   ├── App.jsx
+│   │   └── main.jsx
+│   └── package.json
+│
+└── README.md                    # Setup instructions, demo script, and accessibility guide
 
-MIT (add a LICENSE file when you push)
