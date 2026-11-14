@@ -1,0 +1,41 @@
+[
+  {
+    "id": "temp-anomalies",
+    "keyShortcut": "1",
+    "title": "Global Temperature Anomalies (1880–Present)",
+    "videoUrl": "/fallback-media/global-temp-anomalies.mp4",
+    "mode": "heat",
+    "audioLegend": "Audio Legend: Deep bass notes mean cooler historical temperatures. Rising high chimes mean extreme global warming.",
+    "milestones": [
+      { "timeSec": 1, "text": "1880: Pre-industrial baseline. Cooler global temperatures." },
+      { "timeSec": 10, "text": "1980: Warming trend accelerates across the Northern Hemisphere." },
+      { "timeSec": 20, "text": "Present day: Record-breaking global heat anomalies." }
+    ]
+  },
+  {
+    "id": "co2-plumes",
+    "keyShortcut": "2",
+    "title": "Global Carbon Dioxide (CO2) Plumes",
+    "videoUrl": "/fallback-media/global-co2-plumes.mp4",
+    "mode": "co2",
+    "audioLegend": "Audio Legend: Sound pans from left to right as carbon plumes travel eastward. Higher pitch means higher carbon concentration.",
+    "milestones": [
+      { "timeSec": 1, "text": "Northern spring: Carbon dioxide builds over major industrial zones." },
+      { "timeSec": 9, "text": "Summer: Vegetation absorbs carbon, lowering the musical pitch." },
+      { "timeSec": 17, "text": "Winter: Emissions rise again and swirl across the globe." }
+    ]
+  },
+  {
+    "id": "arctic-sea-ice",
+    "keyShortcut": "3",
+    "title": "Arctic Sea Ice Minimum",
+    "videoUrl": "/fallback-media/arctic-sea-ice.mp4",
+    "mode": "ice",
+    "audioLegend": "Audio Legend: Low, grounded tones represent thick sea ice. As white ice shrinks, the pitch rises to signal ice loss.",
+    "milestones": [
+      { "timeSec": 1, "text": "1984: Thick multi-year sea ice covers the Arctic Ocean." },
+      { "timeSec": 10, "text": "2012: Historic minimum sea ice extent recorded." },
+      { "timeSec": 18, "text": "Present day: Younger, thinner seasonal ice remains." }
+    ]
+  }
+]
