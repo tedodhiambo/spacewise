@@ -18,15 +18,13 @@ class EarthSoundEngine {
     if (this.ctx) return;
     this.ctx = new (window.AudioContext || window.webkitAudioContext)();
 
-    // Primary melody oscillator
     this.leadOsc = this.ctx.createOscillator();
     this.leadOsc.type = 'triangle';
-    this.leadOsc.frequency.value = SCALE_FREQS;
+    this.leadOsc.frequency.value = SCALE_FREQS[0];
 
-    // Warm sub-bass harmonic layer (one octave lower)
     this.subOsc = this.ctx.createOscillator();
     this.subOsc.type = 'sine';
-    this.subOsc.frequency.value = SCALE_FREQS / 2;
+    this.subOsc.frequency.value = SCALE_FREQS[0] / 2;
 
     this.gain = this.ctx.createGain();
     this.gain.gain.value = 0;
@@ -42,17 +40,19 @@ class EarthSoundEngine {
     this.subOsc.start();
   }
 
-  start() {
+  async start() {
     this.init();
-    if (this.ctx.state === 'suspended') this.ctx.resume();
+    if (this.ctx.state === 'suspended') {
+      await this.ctx.resume();
+    }
     this.isRunning = true;
-    this.gain.gain.setTargetAtTime(0.22, this.ctx.currentTime, 0.1);
+    this.gain.gain.setTargetAtTime(0.35, this.ctx.currentTime, 0.05);
   }
 
   stop() {
     if (!this.ctx) return;
     this.isRunning = false;
-    this.gain.gain.setTargetAtTime(0, this.ctx.currentTime, 0.08);
+    this.gain.gain.setTargetAtTime(0, this.ctx.currentTime, 0.05);
   }
 
   update(intensity, pan) {
@@ -67,7 +67,7 @@ class EarthSoundEngine {
     this.leadOsc.frequency.setTargetAtTime(targetFreq, this.ctx.currentTime, 0.08);
     this.subOsc.frequency.setTargetAtTime(targetFreq / 2, this.ctx.currentTime, 0.08);
     this.panner.pan.setTargetAtTime(pan, this.ctx.currentTime, 0.1);
-    this.gain.gain.setTargetAtTime(0.14 + intensity * 0.22, this.ctx.currentTime, 0.08);
+    this.gain.gain.setTargetAtTime(0.25 + intensity * 0.3, this.ctx.currentTime, 0.08);
   }
 }
 

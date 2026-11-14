@@ -4,7 +4,7 @@ import { analyzeEicFrame } from '../engine/frameAnalyzer';
 import { soundEngine } from '../engine/soundEngine';
 
 export default function JukeboxPlayer() {
-  const [activeTrack, setActiveTrack] = useState(tracks);
+  const [activeTrack, setActiveTrack] = useState(tracks[0]);
   const [isPlaying, setIsPlaying] = useState(false);
   const [statusText, setStatusText] = useState('Ready. Press Space to play, or 1, 2, 3 to switch tracks.');
   const [metrics, setMetrics] = useState({ intensity: 0, pan: 0 });
@@ -56,6 +56,7 @@ export default function JukeboxPlayer() {
     rafRef.current = requestAnimationFrame(processFrame);
   }, [activeTrack, speak]);
 
+  // Play / Pause toggle
   const togglePlay = useCallback(async () => {
     const video = videoRef.current;
     if (!video) return;
@@ -63,12 +64,13 @@ export default function JukeboxPlayer() {
     if (video.paused) {
       try {
         await video.play();
-        soundEngine.start();
+        await soundEngine.start();
         setIsPlaying(true);
         speak(`Playing ${activeTrack.title}`);
         rafRef.current = requestAnimationFrame(processFrame);
       } catch (err) {
-        setStatusText('Video file missing in public/fallback-media/. Check README.');
+        console.error('Playback error:', err);
+        setStatusText('Error playing video or audio. Check browser console.');
       }
     } else {
       video.pause();
@@ -79,6 +81,7 @@ export default function JukeboxPlayer() {
     }
   }, [activeTrack, processFrame, speak]);
 
+  // Switch between Track 1, 2, or 3
   const selectTrack = useCallback((track) => {
     if (videoRef.current) {
       videoRef.current.pause();
@@ -92,7 +95,7 @@ export default function JukeboxPlayer() {
     speak(`Selected track ${track.keyShortcut}: ${track.title}. Press L for audio legend, or Space to play.`);
   }, [speak]);
 
-  // Global keyboard navigation for blind and low-vision users
+  // Global keyboard shortcuts
   useEffect(() => {
     const handleKeyDown = (e) => {
       if (e.code === 'Space') {
@@ -104,7 +107,10 @@ export default function JukeboxPlayer() {
         const found = tracks.find((t) => t.keyShortcut === e.key);
         if (found) selectTrack(found);
       } else if (e.code === 'ArrowRight' && videoRef.current) {
-        videoRef.current.currentTime = Math.min(videoRef.current.duration || 0, videoRef.current.currentTime + 3);
+        videoRef.current.currentTime = Math.min(
+          videoRef.current.duration || 0,
+          videoRef.current.currentTime + 3
+        );
       } else if (e.code === 'ArrowLeft' && videoRef.current) {
         videoRef.current.currentTime = Math.max(0, videoRef.current.currentTime - 3);
       }
@@ -121,12 +127,10 @@ export default function JukeboxPlayer() {
         <p className="subtitle">Multi-Sensory Earth Information Center Sonification</p>
       </header>
 
-      {/* Screen-reader live region */}
       <div className="status-banner" role="status" aria-live="polite">
         <strong>Voice Status:</strong> {statusText}
       </div>
 
-      {/* Track Selector Buttons */}
       <nav aria-label="Climate Tracks" className="track-list">
         {tracks.map((track) => (
           <button
@@ -140,7 +144,6 @@ export default function JukeboxPlayer() {
         ))}
       </nav>
 
-      {/* Visual Frame & Hidden Sampler Canvas */}
       <div className="visualizer-box">
         <video
           ref={videoRef}
@@ -154,7 +157,6 @@ export default function JukeboxPlayer() {
         <canvas ref={canvasRef} width={320} height={180} style={{ display: 'none' }} />
       </div>
 
-      {/* Primary Controls */}
       <div className="controls">
         <button onClick={togglePlay} className="primary-btn">
           {isPlaying ? 'Pause Track (Space)' : 'Play Track (Space)'}
@@ -164,7 +166,6 @@ export default function JukeboxPlayer() {
         </button>
       </div>
 
-      {/* Real-time Audio Telemetry Readout */}
       <div className="telemetry" aria-hidden="true">
         <span>Signal Intensity: {Math.round(metrics.intensity * 100)}%</span>
         <span>Stereo Pan: {metrics.pan < -0.15 ? 'West (Left)' : metrics.pan > 0.15 ? 'East (Right)' : 'Global Center'}</span>
