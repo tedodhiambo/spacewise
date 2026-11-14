@@ -25,7 +25,7 @@ bun run dev
 
 Visualizations and data: NASA Earth Information Center. Add exact sources for each visual in `docs/sources.md`.
 
-earth-jukebox/
+spacewise/
 ├── backend/                     # Node.js + Express (Thin proxy & metadata API)
 │   ├── data/
 │   │   └── tracks.json          # Curated EIC track list (videos, milestones, audio rules)
