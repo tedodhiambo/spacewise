@@ -1,0 +1,111 @@
+/* frontend/src/App.css */
+body {
+  margin: 0;
+  background-color: #0b0f19;
+  color: #f8fafc;
+  font-family: system-ui, -apple-system, sans-serif;
+}
+
+.jukebox-container {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 2rem 1.5rem;
+}
+
+h1 {
+  margin: 0;
+  font-size: 2.2rem;
+  color: #38bdf8;
+}
+
+.subtitle {
+  color: #94a3b8;
+  margin-top: 0.25rem;
+}
+
+.status-banner {
+  background: #1e293b;
+  border-left: 5px solid #38bdf8;
+  padding: 1rem;
+  margin: 1.5rem 0;
+  border-radius: 6px;
+  font-size: 1.05rem;
+}
+
+.track-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 0.75rem;
+  margin-bottom: 1.5rem;
+}
+
+.track-btn {
+  background: #1e293b;
+  color: #f8fafc;
+  border: 2px solid #334155;
+  padding: 0.9rem;
+  border-radius: 8px;
+  text-align: left;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.track-btn.active,
+.track-btn:focus {
+  border-color: #38bdf8;
+  background: #0f172a;
+  outline: 3px solid #38bdf8;
+}
+
+.visualizer-box {
+  background: #000;
+  border: 2px solid #334155;
+  border-radius: 10px;
+  overflow: hidden;
+  aspect-ratio: 16 / 9;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.eic-video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.controls {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1.25rem;
+}
+
+.primary-btn,
+.secondary-btn {
+  padding: 0.9rem 1.4rem;
+  font-size: 1rem;
+  font-weight: 700;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+}
+
+.primary-btn {
+  background: #38bdf8;
+  color: #0b0f19;
+}
+
+.secondary-btn {
+  background: #334155;
+  color: #f8fafc;
+}
+
+.telemetry {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 1rem;
+  color: #94a3b8;
+  font-family: monospace;
+  font-size: 0.95rem;
+}
