@@ -26,28 +26,28 @@ bun run dev
 Visualizations and data: NASA Earth Information Center. Add exact sources for each visual in `docs/sources.md`.
 
 spacewise/
-├── backend/                     # Node.js + Express (Thin proxy & metadata API)
-│   ├── data/
-│   │   └── tracks.json          # Curated EIC track list (videos, milestones, audio rules)
-│   ├── routes/
-│   │   └── nasaProxy.js         # Fetches NASA EIC media/APIs to avoid browser CORS blocks
-│   ├── server.js                # Express entry point
+├── backend/                          # Lightweight Express server (for future live NASA APIs)
+│   ├── server.js
 │   └── package.json
 │
-├── frontend/                    # React (Vite)
+├── frontend/                         # React (Vite) - Self-contained Offline Demo App
 │   ├── public/
-│   │   └── fallback-media/      # Local copies of 2–3 NASA EIC videos/frames for offline demo safety
+│   │   └── fallback-media/           # Place your 3 downloaded NASA SVS MP4 files here:
+│   │       ├── global-temp-anomalies.mp4
+│   │       ├── global-co2-plumes.mp4
+│   │       └── arctic-sea-ice.mp4
 │   ├── src/
-│   │   ├── components/
-│   │   │   ├── JukeboxPlayer.jsx    # Main playback UI, track selector, and keyboard shortcuts
-│   │   │   ├── EicVisualizer.jsx    # Renders NASA video/frames onto HTML5 <canvas>
-│   │   │   ├── AudioLegendModal.jsx # Accessible "Press L for Audio Guide" intro
-│   │   │   └── LiveNarration.jsx    # Hidden aria-live region + SpeechSynthesis controller
+│   │   ├── data/
+│   │   │   └── tracks.json           # Track config, color mode, audio legend & voice cues
 │   │   ├── engine/
-│   │   │   ├── frameAnalyzer.js     # Reads <canvas> RGBA pixels & detects heat/CO2 hotspots
-│   │   │   └── soundEngine.js       # Web Audio API synth (oscillators, stereo panner, scales)
+│   │   │   ├── frameAnalyzer.js      # Real-time <canvas> RGB pixel & hotspot analyzer
+│   │   │   └── soundEngine.js        # Web Audio API C-Minor Pentatonic synthesizer
+│   │   ├── components/
+│   │   │   └── JukeboxPlayer.jsx     # Accessible UI, keyboard shortcuts & voice narrator
 │   │   ├── App.jsx
+│   │   ├── App.css
 │   │   └── main.jsx
 │   └── package.json
 │
-└── README.md                    # Setup instructions, demo script, and accessibility guide
+└── README.md
+
